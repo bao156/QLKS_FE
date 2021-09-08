@@ -17,7 +17,7 @@ function RoomView(props) {
     setLoading(true);
     const getRoomClasses = async () => {
       try {
-        const res = await axios.get("http://localhost:8084/api/room-class/all");
+        const res = await axios.get("http://localhost:8084/api/room-class/promotion/all");
         setRoomClasses(res.data);
         setLoading(false);
       } catch (error) {

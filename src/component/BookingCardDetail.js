@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { FcDeleteDatabase } from "react-icons/fc";
 import NumberFormat from "react-number-format";
 import PayPal from "../component/PayPal";
+import moment from "moment";
 import "./BookingCardDetail.css";
 import { ChangingDateBooking } from "./ChangeDateBooking";
 import { Success, Warning } from "./Notification";
@@ -88,7 +89,7 @@ function BookingCardDetails(props) {
 
   const ConfirmBookingCard = async () => {
     await axios
-      .put("http://localhost:8084/api/bookingCards")
+      .put("http://localhost:8084/api/booking-cards")
       .then((response) => {
         Success("Congratulation", "Booking thành công! Vui lòng kiểm tra mail");
         setKeyToOverview(1);
@@ -102,7 +103,7 @@ function BookingCardDetails(props) {
 
   const deleteBookingDelete = async (key) => {
     try {
-      await axios.delete("http://localhost:8084/api/bookingCards/" + key);
+      await axios.delete("http://localhost:8084/api/booking-cards/" + key);
     } catch (error) {
       console.log(error.message);
     }
@@ -111,7 +112,7 @@ function BookingCardDetails(props) {
   useEffect(() => {
     const getBookingCardDetailByEmail = async () => {
       await axios
-        .get("http://localhost:8084/api/bookingCards")
+        .get("http://localhost:8084/api/booking-cards/current")
         .then((res) => {
           setBookingCard(res.data);
           setSavedDeposit({
@@ -348,13 +349,13 @@ function BookingCardDetails(props) {
                   <tr>
                     <td style={{ height: "40px" }}>
                       <strong>Ngày nhận phòng:</strong>{" "}
-                      {bookingCard.receivingAtDate}
+                      {moment(bookingCard.receivingAtDate).format("YYYY-MM-DD")}
                     </td>
                   </tr>
                   <tr>
                     <td style={{ height: "40px" }}>
                       <strong>Ngày trả phòng:</strong>{" "}
-                      {bookingCard.backingAtDate}
+                      {moment(bookingCard.backingAtDate).format("YYYY-MM-DD")}
                     </td>
                   </tr>
 

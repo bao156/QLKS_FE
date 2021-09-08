@@ -40,9 +40,10 @@ export function HeaderDetail(props) {
     if (bookingCard == "Đăng kí") {
       setIsModalRegisterVisible(!isModalRegisterVisible);
     } else {
+      
       let hasBookingCard = false;
       try {
-        await axios.get("http://localhost:8084/api/bookingCards");
+        await axios.get("http://localhost:8084/api/booking-cards/current");
         hasBookingCard = true;
       } catch (error) {
         console.log(error.message);

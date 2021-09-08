@@ -13,6 +13,7 @@ export function DatePickerBooking(props) {
     setEndDate(date);
   }
   const CreateBookingCard = async () => {
+    
     try {
       if (startDate == "" || endDate == "") {
         Warning("Failed!", "Vui lòng không để trống ngày nhận và trả");
@@ -22,8 +23,9 @@ export function DatePickerBooking(props) {
         backingAtDate: endDate,
         deposit: 0,
       };
+  
       await axios
-        .post("http://localhost:8084/api/bookingCards", article)
+        .post("http://localhost:8084/api/booking-cards", article)
         .then((response) => {
           props.click(2);
         })

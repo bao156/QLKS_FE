@@ -43,7 +43,7 @@ function RoomViewDetail(props) {
         deposit: 0,
       };
       await axios
-        .post("http://localhost:8084/api/bookingCards", article)
+        .post("http://localhost:8084/api/booking-cards", article)
         .then((response) => {
           setBookingCard(response.data);
           hasBookingCard = true;
@@ -61,7 +61,9 @@ function RoomViewDetail(props) {
             );
           }
         });
-      const res = await axios.get("http://localhost:8084/api/bookingCards");
+      const res = await axios.get(
+        "http://localhost:8084/api/booking-cards/current"
+      );
       setBookingCard(res.data);
     } catch (error) {
       console.log(error.message);
@@ -75,7 +77,7 @@ function RoomViewDetail(props) {
       };
       await axios
         .post(
-          "http://localhost:8084/api/bookingCards/bookingCardDetail",
+          "http://localhost:8084/api/booking-cards/bookingCardDetail",
           article
         )
         .then((response) => {
@@ -101,7 +103,7 @@ function RoomViewDetail(props) {
 
   const BookingRoomClass = async () => {
     await axios
-      .get("http://localhost:8084/api/bookingCards")
+      .get("http://localhost:8084/api/booking-cards/current")
       .then((response) => {
         hasBookingCard = true;
       })
@@ -140,7 +142,9 @@ function RoomViewDetail(props) {
   useEffect(() => {
     const getRoomClass = async () => {
       try {
-        const res = await axios.get("http://localhost:8084/api/bookingCards");
+        const res = await axios.get(
+          "http://localhost:8084/api/booking-cards/current"
+        );
         setBookingCard(res.data);
       } catch (error) {
         console.log(error.message);
@@ -318,18 +322,10 @@ function RoomViewDetail(props) {
       <p
         style={{ marginLeft: "100px", marginBottom: "40px", fontSize: "30px" }}
       >
-        {roomClass.description}
+        
+        <div dangerouslySetInnerHTML={{ __html: roomClass.description }}></div>
       </p>
-      <p
-        style={{ marginLeft: "100px", marginBottom: "40px", fontSize: "30px" }}
-      >
-        The D&B Hotel được biết đến là một trong những Hotel Boutique đẳng cấp
-        tại Thành phố HCM xinh đẹp này.<br></br> Không chỉ là nơi nghỉ dưỡng
-        cuối tuần hoàn hảo cho gia đình, những người thân yêu, mà còn là chốn
-        thiên đường cho những cặp uyên ương trải nghiệm những kỳ nghỉ lãng mạn.
-        <br></br> Ngoài ra, The D&B Hotel còn là điểm dừng chân lý tưởng của
-        những doanh nhân, những nhân viên công tác tại thành phố Hà Nội.{" "}
-      </p>
+      
     </div>
   );
 }

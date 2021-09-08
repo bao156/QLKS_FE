@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { VscCalendar } from "react-icons/vsc";
 import { Success, Warning } from "./Notification";
 import { RiEdit2Line } from "react-icons/ri";
+import moment from "moment";
 
 export function ChangingDateBookingInRoomClass(props) {
   const [dateBooking, setDateBooking] = useState({
@@ -47,7 +48,7 @@ export function ChangingDateBookingInRoomClass(props) {
           backingAtDate: dateBooking.endDate,
         };
         const res = await axios
-          .put("http://localhost:8084/api/bookingCards/update", article)
+          .put("http://localhost:8084/api/booking-cards/update", article)
           .then((response) => {
             Success("Success!", "Cập nhật thành công");
             setChangingDateVisibled(false);
@@ -87,7 +88,7 @@ export function ChangingDateBookingInRoomClass(props) {
         name="requested_order_ship_date"
         type="text"
         disabled="true"
-        value={officialDateBooking.startDate}
+        value={moment(officialDateBooking.startDate).format("YYYY-MM-DD")}
         style={{
           height: "50px",
           fontSize: "18px",
@@ -118,7 +119,7 @@ export function ChangingDateBookingInRoomClass(props) {
       <input
         name="requested_order_ship_date"
         type="text"
-        value={officialDateBooking.endDate}
+        value={moment(officialDateBooking.endDate).format("YYYY-MM-DD")}
         disabled="true"
         style={{
           height: "50px",

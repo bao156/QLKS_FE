@@ -33,7 +33,7 @@ export default function Paypal(props) {
             deposit: temp,
           };
           await axios
-            .put("http://localhost:8084/api/bookingCards/deposit", article)
+            .put("http://localhost:8084/api/booking-cards/deposit", article)
             .then((response) => {
               props.deposit(temp);
               console.log(order);
