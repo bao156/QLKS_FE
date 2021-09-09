@@ -1,24 +1,11 @@
-import React from 'react';
-import { GoogleMap, LoadScript } from 'react-google-maps';
+import React from "react";
 const Map = () => {
-  
-  const mapStyles = {        
-    height: "100vh",
-    width: "100%"};
-  
-  const defaultCenter = {
-    lat: 41.3851, lng: 2.1734
-  }
-  
   return (
-     <LoadScript
-       googleMapsApiKey='AIzaSyBZAGNWbTgwSsteFszD3if8NOIA1sqH96k'>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={13}
-          center={defaultCenter}
-        />
-     </LoadScript>
-  )
-}
+    <div >
+      <h1 style={{textAlign:"center"}}>Cảm ơn quý khách đã ghé thăm địa chỉ của chúng tôi!</h1>
+      <h1 style={{textAlign:"center", marginLeft:"450px",marginTop:"150px", color:"GrayText"}}>Hotline: 0836877963!</h1>
+      <img src={require("../image/ThongBao.png").default}></img>
+    </div>
+  );
+};
 export default Map;

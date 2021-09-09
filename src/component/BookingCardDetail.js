@@ -1,10 +1,10 @@
-import { Button, Col, InputNumber, Modal, Row } from "antd";
+import { Button, Col, Modal, Row } from "antd";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { FcDeleteDatabase } from "react-icons/fc";
 import NumberFormat from "react-number-format";
 import PayPal from "../component/PayPal";
-import moment from "moment";
 import "./BookingCardDetail.css";
 import { ChangingDateBooking } from "./ChangeDateBooking";
 import { Success, Warning } from "./Notification";
@@ -12,13 +12,9 @@ import { Success, Warning } from "./Notification";
 function BookingCardDetails(props) {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
-  const [test, setTest] = useState(0);
   const [deposit, setDeposit] = useState(0);
-  const [savedDeposit, setSavedDeposit] = useState({
-    tempDeposit: 0,
-    deposit: 0,
-  });
-  const [isDepositModalVisible, setIsDepositModalVisible] = useState(false);
+  const [isDisableButton, setDisableButton] = useState(false);
+  const [savedDeposit, setSavedDeposit] = useState(0);
   const [checkout, setCheckOut] = useState(false);
   const [bookingCard, setBookingCard] = useState({});
 
@@ -42,29 +38,16 @@ function BookingCardDetails(props) {
     props.click(key);
   }
 
-  function setPayPalVisibled() {
-    if (isNaN(savedDeposit.tempDeposit)) {
-      Warning("Failed", "Tiền đặc cọc không hợp lẹ");
-    } else if (savedDeposit.tempDeposit > total) {
-      Warning("Failed", "Vui lòng không vượt quá số tiền thanh toán");
-    } else if (savedDeposit.tempDeposit <= 0) {
-      Warning("Failed", "Tiền đặc cọc vui lòng lớn hơn 0");
-    } else {
-      setIsDepositModalVisible(false);
-      setCheckOut(true);
-    }
-  }
-
-  function setDepositModalVisibled() {
-    setIsDepositModalVisible(true);
-  }
-
-  function setDepositModalInvisibled() {
-    setIsDepositModalVisible(false);
-  }
-
   function setConfirmModalVisibled() {
-    setConfirmVisibled(true);
+    if(deposit!=0)
+    {
+      setConfirmVisibled(true);
+    }
+    else
+    {
+      Warning("Failed","Vui lòng đặt cọc trước để xác nhận");
+    }
+  
   }
 
   function setConfirmModalInvisibled() {
@@ -78,14 +61,16 @@ function BookingCardDetails(props) {
     });
   }
 
-  function GetDeposit(getDeposit) {
-    setDeposit(getDeposit);
-    setCheckOut(false);
+  function showPaypal(getDeposit) {
+    setSavedDeposit(total * 0.1);
+    setCheckOut(true);
   }
 
-  const onChange = (e) => {
-    // alert(e);
-  };
+  function GetDeposit(getDeposit) {
+    setDeposit(getDeposit);
+    setDisableButton(true);
+    setCheckOut(false);
+  }
 
   const ConfirmBookingCard = async () => {
     await axios
@@ -115,12 +100,12 @@ function BookingCardDetails(props) {
         .get("http://localhost:8084/api/booking-cards/current")
         .then((res) => {
           setBookingCard(res.data);
-          setSavedDeposit({
-            ...savedDeposit,
-            ["deposit"]: res.data.deposit,
-          });
           setDeposit(res.data.deposit);
           setItems(res.data.bookingDetails);
+          if(res.data.deposit!=0)
+          {
+            setDisableButton(true);
+          }
           res.data.bookingDetails.forEach((amount) => {
             const temp =
               amount.quantity * amount.price * res.data.quantityOfDates + total;
@@ -169,15 +154,7 @@ function BookingCardDetails(props) {
                         ></img>
                       </td>
                       <td>{bookingCardDetail.roomClassName}</td>
-                      <td>
-                        <InputNumber
-                          min={1}
-                          size="100px"
-                          // value={bookingCardDetail.quantity}
-                          defaultValue={bookingCardDetail.quantity}
-                          onChange={onChange}
-                        />
-                      </td>
+                      <td>{bookingCardDetail.quantity}</td>
 
                       {bookingCardDetail.promotionValue == 0 ? (
                         <td>
@@ -186,7 +163,7 @@ function BookingCardDetails(props) {
                             displayType={"text"}
                             thousandSeparator={true}
                           />{" "}
-                          VND/Ngày
+                          /Ngày
                         </td>
                       ) : (
                         <td>
@@ -209,7 +186,7 @@ function BookingCardDetails(props) {
                             thousandSeparator={true}
                             subfix={"$"}
                           />{" "}
-                          VND/Ngày
+                          /Ngày
                         </td>
                       )}
 
@@ -224,7 +201,6 @@ function BookingCardDetails(props) {
                           displayType={"text"}
                           thousandSeparator={true}
                         />{" "}
-                        VND
                       </td>
                       <td>
                         <FcDeleteDatabase
@@ -272,33 +248,6 @@ function BookingCardDetails(props) {
                   </tr>
                   <tr>
                     <td style={{ height: "40px" }}>
-                      <Modal
-                        title="Bạn muốn đặt cọc bao nhiêu $?"
-                        visible={isDepositModalVisible}
-                        onCancel={setDepositModalInvisibled}
-                        onOk={() => setPayPalVisibled()}
-                        okText="Xác nhận"
-                        cancelText="Hủy bỏ"
-                      >
-                        <input
-                          key="money"
-                          type="text"
-                          onChange={(e) => {
-                            setSavedDeposit({
-                              ...savedDeposit,
-                              ["tempDeposit"]: e.target.value,
-                            });
-                          }}
-                          value={savedDeposit.tempDeposit}
-                          style={{
-                            borderBottom: "2px solid black",
-                            borderRadius: "3px",
-                            width: "300px",
-                            height: "40px",
-                          }}
-                        />
-                        VND
-                      </Modal>
                       <strong>Tiền cọc:</strong>
                       <NumberFormat
                         value={deposit}
@@ -311,7 +260,8 @@ function BookingCardDetails(props) {
                         <Button
                           type="primary"
                           style={{ marginLeft: "190px" }}
-                          onClick={() => setDepositModalVisibled()}
+                          onClick={() => showPaypal()}
+                          disabled={isDisableButton}
                         >
                           Đặt cọc
                         </Button>
@@ -327,7 +277,6 @@ function BookingCardDetails(props) {
                           displayType={"text"}
                           thousandSeparator={true}
                         />
-                        VND
                       </h4>
                     </td>
                   </tr>

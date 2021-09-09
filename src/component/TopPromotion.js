@@ -66,7 +66,7 @@ function TopPromotion(props) {
                     displayType={"text"}
                     thousandSeparator={true}
                   />
-                  {""} VND/Ngày
+                  {""}/Ngày
                 </p>
                 <Button
                   key={roomClass.id}

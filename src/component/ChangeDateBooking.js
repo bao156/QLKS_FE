@@ -34,7 +34,7 @@ export function ChangingDateBooking(props) {
           backingAtDate: dateBooking.endDate,
         };
         const res = await axios
-          .put("http://localhost:8084/api/bookingCards/update", article)
+          .put("http://localhost:8084/api/booking-cards/update", article)
           .then((response) => {
             Success("Success!", "Cập nhật thành công");
             setChangingDateVisibled(false);

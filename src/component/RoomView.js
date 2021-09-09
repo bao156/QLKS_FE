@@ -3,13 +3,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import "./RoomView.css";
+import { BsFunnelFill } from "react-icons/bs";
+import { Select } from "antd";
+const provinceData = ["<5.000.000", "≥5.000.000", "Tất cả"];
+const { Option } = Select;
 
 function RoomView(props) {
   const [roomClasses, setRoomClasses] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("Tất cả");
   const [filteredCountries, setFilteredRoomClasses] = useState([]);
-
+  const comparision = Number(5000000);
   const GetIdRoomClass = (key) => {
     props.click(key);
   };
@@ -17,7 +21,9 @@ function RoomView(props) {
     setLoading(true);
     const getRoomClasses = async () => {
       try {
-        const res = await axios.get("http://localhost:8084/api/room-class/promotion/all");
+        const res = await axios.get(
+          "http://localhost:8084/api/room-class/promotion/all"
+        );
         setRoomClasses(res.data);
         setLoading(false);
       } catch (error) {
@@ -27,12 +33,24 @@ function RoomView(props) {
     getRoomClasses();
   }, []);
 
+  const handleProvinceChange = (value) => {
+    setSearch(value);
+  };
+
   useEffect(() => {
-    setFilteredRoomClasses(
-      roomClasses.filter((roomClass) =>
-        roomClass.roomClassName.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (search == "Tất cả") {
+      setFilteredRoomClasses(
+        roomClasses.filter((roomClass) => roomClass.price != 0)
+      );
+    } else if (search == "<5.000.000") {
+      setFilteredRoomClasses(
+        roomClasses.filter((roomClass) => roomClass.price < 5000000)
+      );
+    } else if (search == "≥5.000.000") {
+      setFilteredRoomClasses(
+        roomClasses.filter((roomClass) => roomClass.price >= 5000000)
+      );
+    }
   }, [search, roomClasses]);
 
   return (
@@ -40,14 +58,19 @@ function RoomView(props) {
       <h1 style={{ fontSize: 72, marginLeft: "500px", fontStyle: "italic" }}>
         Room Classes
       </h1>
+      <span></span>
+     
+      <Select
+        defaultValue={provinceData[2]}
+        style={{ width: 120,marginLeft:"1200px",width:"150px",height:"70px" }}
+        onChange={handleProvinceChange}
+      >
+        {provinceData.map((province) => (
+          <Option key={province}>{province}</Option>
+        ))}
+      </Select>
+      <BsFunnelFill size="32px" style={{}}></BsFunnelFill>
       <br></br>
-      <Input.Search
-        type="text"
-        placeholder="Search room class name"
-        onChange={(e) => setSearch(e.target.value)}
-        style={{ width: "300px", marginLeft: "1100px", height: "60px" }}
-        enterButton
-      />
       <br></br>
       <div class="row">
         {filteredCountries.map((roomClass, idx) => (
@@ -72,7 +95,7 @@ function RoomView(props) {
                         thousandSeparator={true}
                         style={{ fontSize: "20px", fontStyle: "italic" }}
                       />{" "}
-                      VND/Ngày
+                      /Ngày
                     </i>
                   ) : (
                     <div>
@@ -95,7 +118,7 @@ function RoomView(props) {
                         thousandSeparator={true}
                         subfix={"$"}
                       />{" "}
-                      VND/Ngày
+                      /Ngày
                     </div>
                   )}
                 </p>

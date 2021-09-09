@@ -85,16 +85,7 @@ function RoomViewDetail(props) {
         })
         .catch(function (error) {
           let errorMessage = error.response.data.errorCode;
-          console.log(errorMessage);
-          if (errorMessage == "room-is-full-for-type-on-these-date") {
-            Warning("Failed", "Hạng này hiện không còn phòng trống!");
-          } else {
-            let displayMessage =
-              "Loại phòng này chỉ còn " +
-              errorMessage.substring(0, 1) +
-              " phòng trống";
-            Warning("Failed", displayMessage);
-          }
+          Warning("Failed", errorMessage);
         });
     } catch (error) {
       console.log(error.message);
@@ -253,7 +244,6 @@ function RoomViewDetail(props) {
                   value={roomClass.price}
                   displayType={"text"}
                   thousandSeparator={true}
-                  prefix={"$"}
                 />{" "}
                 /Ngày
               </h2>
@@ -271,7 +261,6 @@ function RoomViewDetail(props) {
                     displayType={"text"}
                     thousandSeparator={true}
                     style={{ fontSize: "25px", fontStyle: "italic" }}
-                    prefix={"$"}
                   />{" "}
                 </i>
                 <span marginLeft="50px"> &nbsp;&nbsp;&nbsp;</span>
@@ -281,7 +270,6 @@ function RoomViewDetail(props) {
                   }
                   displayType={"text"}
                   thousandSeparator={true}
-                  prefix={"$"}
                 />{" "}
                 /Ngày
               </h2>
@@ -322,10 +310,8 @@ function RoomViewDetail(props) {
       <p
         style={{ marginLeft: "100px", marginBottom: "40px", fontSize: "30px" }}
       >
-        
         <div dangerouslySetInnerHTML={{ __html: roomClass.description }}></div>
       </p>
-      
     </div>
   );
 }
