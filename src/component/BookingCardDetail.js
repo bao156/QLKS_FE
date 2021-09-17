@@ -39,15 +39,11 @@ function BookingCardDetails(props) {
   }
 
   function setConfirmModalVisibled() {
-    if(deposit!=0)
-    {
+    if (deposit != 0) {
       setConfirmVisibled(true);
+    } else {
+      Warning("Failed", "Vui lòng đặt cọc trước để xác nhận");
     }
-    else
-    {
-      Warning("Failed","Vui lòng đặt cọc trước để xác nhận");
-    }
-  
   }
 
   function setConfirmModalInvisibled() {
@@ -70,6 +66,8 @@ function BookingCardDetails(props) {
     setDeposit(getDeposit);
     setDisableButton(true);
     setCheckOut(false);
+    Success("Congratulation", "Booking thành công! Vui lòng kiểm tra mail");
+    setKeyToOverview(1);
   }
 
   const ConfirmBookingCard = async () => {
@@ -102,8 +100,7 @@ function BookingCardDetails(props) {
           setBookingCard(res.data);
           setDeposit(res.data.deposit);
           setItems(res.data.bookingDetails);
-          if(res.data.deposit!=0)
-          {
+          if (res.data.deposit != 0) {
             setDisableButton(true);
           }
           res.data.bookingDetails.forEach((amount) => {
@@ -317,33 +314,6 @@ function BookingCardDetails(props) {
                   </tr>
                 </tbody>
               </table>
-
-              <>
-                <Button
-                  type="primary"
-                  onClick={() => setConfirmModalVisibled()}
-                  style={{
-                    border: "none",
-                    marginLeft: "250px",
-                    width: "250px",
-                    height: "50px",
-                  }}
-                >
-                  Confirm Booking
-                </Button>
-                <Modal
-                  title="Confirm"
-                  visible={isConfirmVisibled}
-                  onOk={ConfirmBookingCard}
-                  onCancel={() => setConfirmModalInvisibled()}
-                  okText="Xác nhận"
-                  cancelText="Hủy bỏ"
-                >
-                  <p style={{ fontSize: "20px" }}>
-                    Bạn có muốn xác nhận phiếu đặt?
-                  </p>
-                </Modal>
-              </>
             </Col>
           </Row>
         </div>

@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { Warning } from "./Notification";
 
 export default function Paypal(props) {
   const [value, setValue] = useState(1);
   const paypal = useRef();
 
   useEffect(() => {
-    alert(props.payAmount);
     setValue(props.payAmount);
     window.paypal
       .Buttons({
@@ -37,6 +37,15 @@ export default function Paypal(props) {
             })
             .catch(function (error) {
               console.log(error.response.data.errorCode);
+            });
+
+          await axios
+            .put("http://localhost:8084/api/booking-cards")
+            .then((response) => {
+            })
+            .catch(function (error) {
+              console.log(error.response.data.errorCode);
+              Warning("Failed", error.response.data.errorCode);
             });
         },
         onError: (err) => {
