@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
-import "./Header.css";
-import { Success, Error, Warning } from "../component/Notification";
-import { Modal, Button } from "antd";
-import { BiUserCircle, BiClipboard } from "react-icons/bi";
-import { ModalRegister } from "../component/ModalRegister";
-import { UserDropDown } from "../component/UserDropDown";
 import axios from "axios";
+import React, { useState } from "react";
+import { BiClipboard, BiUserCircle } from "react-icons/bi";
+import { ModalRegister } from "../component/ModalRegister";
+import { Error, Success, Warning } from "../component/Notification";
+import { UserDropDown } from "../component/UserDropDown";
+import { BookingCardHistories } from "../component/History/BookingCardHistories";
+import "./Header.css";
 
 export function HeaderDetail(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -40,7 +41,6 @@ export function HeaderDetail(props) {
     if (bookingCard == "Đăng kí") {
       setIsModalRegisterVisible(!isModalRegisterVisible);
     } else {
-      
       let hasBookingCard = false;
       try {
         await axios.get("http://localhost:8084/api/booking-cards/current");
@@ -165,7 +165,7 @@ export function HeaderDetail(props) {
       </>
       {/* Đăng kí */}
       {hasToken == false ? (
-        <div style={{ marginLeft: "1000px", marginTop: "-64px" }}>
+        <div style={{ marginLeft: "800px", marginTop: "-64px" }}>
           <Button
             type="primary"
             onClick={showModal}
@@ -186,7 +186,7 @@ export function HeaderDetail(props) {
           ></ModalRegister>
         </div>
       ) : (
-        <div style={{ marginLeft: "1060px", marginTop: "-55px" }}>
+        <div style={{ marginLeft: "950px", marginTop: "-55px" }}>
           <UserDropDown email={name} click={getMenuKey}></UserDropDown>
           <Button
             type="primary"
@@ -211,9 +211,10 @@ export function HeaderDetail(props) {
           >
             {bookingCard}
           </Button>
+          <BookingCardHistories></BookingCardHistories>
         </div>
       )}
-      
+
       <span style={{ paddingRight: "350px" }}>&nbsp;&nbsp;&nbsp;&nbsp;</span>
       <img
         style={{ marginTop: "-90px" }}

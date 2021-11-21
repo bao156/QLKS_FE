@@ -1,11 +1,15 @@
-import { Button, Input } from "antd";
+import { Button, Select } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { BsFunnelFill } from "react-icons/bs";
 import NumberFormat from "react-number-format";
 import "./RoomView.css";
-import { BsFunnelFill } from "react-icons/bs";
-import { Select } from "antd";
-const provinceData = ["<5.000.000", "≥5.000.000", "Tất cả"];
+const provinceData = [
+  "0-2.000.000",
+  "2.000.000 - 5.000.000",
+  ">5.000.000",
+  "Tất cả",
+];
 const { Option } = Select;
 
 function RoomView(props) {
@@ -42,13 +46,17 @@ function RoomView(props) {
       setFilteredRoomClasses(
         roomClasses.filter((roomClass) => roomClass.price != 0)
       );
-    } else if (search == "<5.000.000") {
+    } else if (search == "0-2.000.000") {
       setFilteredRoomClasses(
-        roomClasses.filter((roomClass) => roomClass.price < 5000000)
+        roomClasses.filter((roomClass) => roomClass.price <= 2000000)
       );
-    } else if (search == "≥5.000.000") {
+    } else if (search == ">5.000.000") {
       setFilteredRoomClasses(
-        roomClasses.filter((roomClass) => roomClass.price >= 5000000)
+        roomClasses.filter((roomClass) => roomClass.price > 5000000)
+      );
+    } else if (search == "2.000.000 - 5.000.000") {
+      setFilteredRoomClasses(
+        roomClasses.filter((roomClass) => roomClass.price >= 2000000 && roomClass.price < 5000000)
       );
     }
   }, [search, roomClasses]);
@@ -59,10 +67,15 @@ function RoomView(props) {
         Room Classes
       </h1>
       <span></span>
-     
+
       <Select
         defaultValue={provinceData[2]}
-        style={{ width: 120,marginLeft:"1200px",width:"150px",height:"70px" }}
+        style={{
+          width: 120,
+          marginLeft: "1150px",
+          width: "200px",
+          height: "70px",
+        }}
         onChange={handleProvinceChange}
       >
         {provinceData.map((province) => (

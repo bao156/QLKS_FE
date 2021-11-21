@@ -1,6 +1,6 @@
 import React from "react";
 const colors = ["../../image/doco.jpg", "../image/pikachu.jpg", "./sensei.jpg"];
-const delay = 2500;
+const delay = 4000;
 
 function SlideInHeader() {
   const [index, setIndex] = React.useState(0);
