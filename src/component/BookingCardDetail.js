@@ -13,10 +13,16 @@ function BookingCardDetails(props) {
   const [items, setItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [deposit, setDeposit] = useState(0);
+  const [paypalId, setPaypalId] = useState("");
+  const [visibleConfirm, setVisibleConfirm] = useState(false);
   const [isDisableButton, setDisableButton] = useState(false);
   const [savedDeposit, setSavedDeposit] = useState(0);
   const [checkout, setCheckOut] = useState(false);
   const [bookingCard, setBookingCard] = useState({});
+
+  function setVisibleConfirmModal() {
+    setVisibleConfirm(!visibleConfirm);
+  }
 
   const handleRemoveItem = (e) => {
     deleteBookingDelete(e);
@@ -58,8 +64,13 @@ function BookingCardDetails(props) {
   }
 
   function showPaypal(getDeposit) {
-    setSavedDeposit(total * 0.1);
-    setCheckOut(true);
+    if (paypalId != "") {
+      setVisibleConfirm(false);
+      setSavedDeposit(total * 0.1);
+      setCheckOut(true);
+    } else {
+      Warning("Failed", "Không để trống paypal");
+    }
   }
 
   function GetDeposit(getDeposit) {
@@ -117,6 +128,41 @@ function BookingCardDetails(props) {
   }, []);
   return (
     <div>
+      <Modal
+        title="Confirming"
+        visible={visibleConfirm}
+        onCancel={setVisibleConfirmModal}
+        onOk={() => showPaypal()}
+        okText="Xác nhận"
+        cancelText="Hủy bỏ"
+        width="500px"
+      >
+        <div>
+          <img
+            src={require("../image/paypal.png").default}
+            style={{
+              width: "200px",
+              height: "200px",
+              position: "absolute",
+              marginLeft: "300px",
+              marginTop: "-70px",
+            }}
+          ></img>
+          <h4>Please fill your paypal ID?</h4>
+          <input
+            key="name"
+            type="text"
+            onChange={(e) => setPaypalId(e.target.value)}
+            value={paypalId}
+            placeholder="PAYPAL ID"
+            style={{
+              border: "1px solid #cfcbca",
+              width: "300px",
+              height: "35px",
+            }}
+          />
+        </div>
+      </Modal>
       <h1 style={{ fontSize: 72, marginLeft: "500px", fontStyle: "italic" }}>
         Mã Booking: {bookingCard.bookingCardId}
       </h1>
@@ -252,12 +298,12 @@ function BookingCardDetails(props) {
                         thousandSeparator={true}
                       />{" "}
                       {checkout ? (
-                        <PayPal payAmount={savedDeposit} deposit={GetDeposit} />
+                        <PayPal payAmount={savedDeposit} deposit={GetDeposit} clientId={paypalId} />
                       ) : (
                         <Button
                           type="primary"
                           style={{ marginLeft: "190px" }}
-                          onClick={() => showPaypal()}
+                          onClick={setVisibleConfirmModal}
                           disabled={isDisableButton}
                         >
                           Đặt cọc
@@ -326,7 +372,7 @@ function BookingCardDetails(props) {
             color: "red",
           }}
         >
-          Phiếu đặt trống! Qúy khác chưa đặt bất kí hạng nào cả
+          Phiếu đặt trống! Qúy khách chưa đặt bất kí hạng nào cả
         </p>
       )}
     </div>

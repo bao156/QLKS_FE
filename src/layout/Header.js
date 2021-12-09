@@ -211,7 +211,7 @@ export function HeaderDetail(props) {
           >
             {bookingCard}
           </Button>
-          <BookingCardHistories></BookingCardHistories>
+          <BookingCardHistories ></BookingCardHistories>
         </div>
       )}
 
