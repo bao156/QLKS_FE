@@ -7,7 +7,7 @@ import "./RoomView.css";
 const provinceData = [
   "0-2.000.000",
   "2.000.000 - 5.000.000",
-  ">5.000.000",
+  "Lớn hơn 5.000.000",
   "Tất cả",
 ];
 const { Option } = Select;
@@ -50,7 +50,7 @@ function RoomView(props) {
       setFilteredRoomClasses(
         roomClasses.filter((roomClass) => roomClass.price <= 2000000)
       );
-    } else if (search == ">5.000.000") {
+    } else if (search == "Lớn hơn 5.000.000") {
       setFilteredRoomClasses(
         roomClasses.filter((roomClass) => roomClass.price > 5000000)
       );
@@ -69,7 +69,7 @@ function RoomView(props) {
       <span></span>
 
       <Select
-        defaultValue={provinceData[2]}
+        defaultValue={provinceData[3]}
         style={{
           width: 120,
           marginLeft: "1150px",

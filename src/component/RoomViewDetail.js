@@ -1,5 +1,6 @@
 import { Button, InputNumber, Modal } from "antd";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { ChangingDateBookingInRoomClass } from "./ChangeDateInRoomClass";
@@ -166,6 +167,7 @@ function RoomViewDetail(props) {
               width: "400px",
             }}
             onChange={(e) => getStartDate(e.target.value)}
+            min={moment(new Date()).format("YYYY-MM-DD")}
             className="form-control"
           />
           <span style={{ marginRight: "100px" }}> &nbsp;&nbsp;&nbsp; </span>
@@ -180,6 +182,7 @@ function RoomViewDetail(props) {
               fontSize: "21px",
               width: "400px",
             }}
+            min={moment(new Date()).format("YYYY-MM-DD")}
             className="form-control"
           />
           <br /> <br />

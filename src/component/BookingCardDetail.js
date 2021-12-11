@@ -2,7 +2,7 @@ import { Button, Col, Modal, Row } from "antd";
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { FcDeleteDatabase } from "react-icons/fc";
+import { AiTwotoneDelete } from "react-icons/ai";
 import NumberFormat from "react-number-format";
 import PayPal from "../component/PayPal";
 import "./BookingCardDetail.css";
@@ -65,9 +65,9 @@ function BookingCardDetails(props) {
 
   function showPaypal(getDeposit) {
     if (paypalId != "") {
+      setCheckOut(true);
       setVisibleConfirm(false);
       setSavedDeposit(total * 0.1);
-      setCheckOut(true);
     } else {
       Warning("Failed", "Không để trống paypal");
     }
@@ -238,21 +238,26 @@ function BookingCardDetails(props) {
                         <NumberFormat
                           value={
                             bookingCardDetail.quantity *
-                            bookingCardDetail.price *
-                            bookingCard.quantityOfDates
+                              bookingCardDetail.price *
+                              bookingCard.quantityOfDates -
+                            bookingCardDetail.quantity *
+                              bookingCardDetail.price *
+                              bookingCard.quantityOfDates *
+                              bookingCardDetail.promotionValue
                           }
                           displayType={"text"}
                           thousandSeparator={true}
                         />{" "}
                       </td>
                       <td>
-                        <FcDeleteDatabase
+                        <AiTwotoneDelete
                           key={bookingCardDetail.roomClassId}
                           onClick={() =>
                             handleRemoveItem(bookingCardDetail.roomClassId)
                           }
-                          size="32px"
-                        ></FcDeleteDatabase>
+                          size="28px"
+                          color="red"
+                        ></AiTwotoneDelete>
                       </td>
                       <td></td>
                       <td></td>
@@ -291,24 +296,22 @@ function BookingCardDetails(props) {
                   </tr>
                   <tr>
                     <td style={{ height: "40px" }}>
-                      <strong>Tiền cọc:</strong>
-                      <NumberFormat
-                        value={deposit}
-                        displayType={"text"}
-                        thousandSeparator={true}
-                      />{" "}
+                      <Button
+                        type="primary"
+                        onClick={setVisibleConfirmModal}
+                        disabled={isDisableButton}
+                      >
+                        Đặt cọc
+                      </Button>
+                      <br></br>
+                      <br></br>
                       {checkout ? (
-                        <PayPal payAmount={savedDeposit} deposit={GetDeposit} clientId={paypalId} />
-                      ) : (
-                        <Button
-                          type="primary"
-                          style={{ marginLeft: "190px" }}
-                          onClick={setVisibleConfirmModal}
-                          disabled={isDisableButton}
-                        >
-                          Đặt cọc
-                        </Button>
-                      )}
+                        <PayPal
+                          payAmount={savedDeposit}
+                          deposit={GetDeposit}
+                          clientId={paypalId}
+                        />
+                      ) : null}
                     </td>
                   </tr>
                   <tr>

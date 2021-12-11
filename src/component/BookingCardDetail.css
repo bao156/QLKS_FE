@@ -24,6 +24,16 @@
     border-bottom: 1px solid #dddddd;
 }
 
+.styled-table tbody tr:hover td{
+    background-color: lightgrey;
+}
+
+.styled-table tbody tr td{
+    transition: all 0.2s;
+}
+
+
+
 .styled-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }

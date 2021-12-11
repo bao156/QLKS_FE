@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { Warning } from "./Notification";
 
-export default function PayPal(props) {
+export default function PayPal(props){
   const [value, setValue] = useState(1);
   const [loaded, setLoaded] = useState(false);
   let payPalRef = useRef();
@@ -15,7 +15,7 @@ export default function PayPal(props) {
   useEffect(() => {
     const script = document.createElement("script");
     script.src =
-      "https://www.paypal.com/sdk/js?client-id=Aa1piJ7A_oVkv2zVyo_2e1-pIM2UwKlSvO_qmR9d7w4WtNifr165TPT5N_2E40Bx5QENk4pxxE6mRMRo";
+      "https://www.paypal.com/sdk/js?client-id=Afwi0e8W49SlhJczo68lfDvW_ur0ed9zIkxXkX6cFEODVlse2n9a63DWpVQZOgho0PTcsb_3R1PLer9c";
     script.addEventListener("load", () => setLoaded(true));
     document.body.appendChild(script);
 
@@ -40,7 +40,7 @@ export default function PayPal(props) {
               console.log();
               const article = {
                 deposit: props.payAmount,
-                clientId: props.clientId,
+                clientId: props.clientId
               };
               await axios
                 .put("http://localhost:8084/api/booking-cards/deposit", article)
@@ -70,4 +70,5 @@ export default function PayPal(props) {
       <div ref={(v) => (payPalRef = v)} />
     </div>
   );
-}
+};
+

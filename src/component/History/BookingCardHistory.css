@@ -27,6 +27,16 @@
     
 }
 
+.styled-table1 tbody tr:hover td{
+    color: #5c5c3d;
+    background-color: lightgrey;
+}
+
+.styled-table1 tbody tr td{
+    transition: all 0.2s;
+}
+
+
 .styled-table1 tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
