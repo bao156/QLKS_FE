@@ -173,7 +173,7 @@ export function HeaderDetail(props) {
             icon={
               <BiUserCircle
                 className="icon-login"
-                size={30}
+                size={27}
                 color="black"
               ></BiUserCircle>
             }
@@ -204,7 +204,7 @@ export function HeaderDetail(props) {
               <BiClipboard
                 key="booking-card"
                 className="icon-login"
-                size={30}
+                size={27}
                 color="black"
               ></BiClipboard>
             }

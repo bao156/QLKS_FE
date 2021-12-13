@@ -14,7 +14,7 @@ export function ContentDetail(props) {
       style={{ padding: 24, minHeight: 380 }}
     >
       <h1 style={{ fontSize: 72, textAlign: "center", fontStyle: "italic" }}>
-        Overview
+        Tổng quan
       </h1>
       <p className="content-text" style={{ fontSize: 30 }}>
         “Chúng tôi luôn coi khách hàng là khách mời tham dự một bữa tiệc mà

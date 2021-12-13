@@ -1,7 +1,7 @@
 import { Button, Modal } from "antd";
 import "antd/dist/antd.css";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BiClipboard } from "react-icons/bi";
 import { Success, Warning } from "./Notification";
 
@@ -15,6 +15,7 @@ export function ModalRegister(props) {
     taxCode: "",
     roleName: "ROLE_USER",
     password: "",
+    clientId: "",
   });
 
   const modalIsVisible = () => {
@@ -70,7 +71,7 @@ export function ModalRegister(props) {
             <BiClipboard
               key="booking-card"
               className="icon-login"
-              size={30}
+              size={27}
               color="black"
             ></BiClipboard>
           }
@@ -179,6 +180,29 @@ export function ModalRegister(props) {
             }
             value={customer.email}
             placeholder="Nhập email"
+            style={{
+              borderBottom: "2px solid black",
+              borderRadius: "3px",
+              width: "300px",
+              height: "40px",
+            }}
+          />
+          <br></br>
+          <br></br>
+          <span style={{ paddingRight: "53px" }}>&nbsp;</span>
+          <label
+            style={{ color: "red", marginRight: "10px", fontSize: "20px" }}
+          >
+            *
+          </label>
+          <input
+            key="clientId"
+            type="text"
+            onChange={(e) =>
+              setCustomer({ ...customer, ["clientId"]: e.target.value })
+            }
+            value={customer.clientId}
+            placeholder="Nhập mã tài khoản"
             style={{
               borderBottom: "2px solid black",
               borderRadius: "3px",

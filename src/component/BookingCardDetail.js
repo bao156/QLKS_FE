@@ -64,13 +64,8 @@ function BookingCardDetails(props) {
   }
 
   function showPaypal(getDeposit) {
-    if (paypalId != "") {
-      setCheckOut(true);
-      setVisibleConfirm(false);
-      setSavedDeposit(total * 0.1);
-    } else {
-      Warning("Failed", "Không để trống paypal");
-    }
+    setCheckOut(!checkout);
+    setSavedDeposit(total * 0.1);
   }
 
   function GetDeposit(getDeposit) {
@@ -116,7 +111,12 @@ function BookingCardDetails(props) {
           }
           res.data.bookingDetails.forEach((amount) => {
             const temp =
-              amount.quantity * amount.price * res.data.quantityOfDates + total;
+              amount.quantity * amount.price * res.data.quantityOfDates -
+              amount.quantity *
+                amount.price *
+                res.data.quantityOfDates *
+                amount.promotionValue +
+              total;
             setTotal((total) => total + temp);
           });
         })
@@ -128,41 +128,6 @@ function BookingCardDetails(props) {
   }, []);
   return (
     <div>
-      <Modal
-        title="Confirming"
-        visible={visibleConfirm}
-        onCancel={setVisibleConfirmModal}
-        onOk={() => showPaypal()}
-        okText="Xác nhận"
-        cancelText="Hủy bỏ"
-        width="500px"
-      >
-        <div>
-          <img
-            src={require("../image/paypal.png").default}
-            style={{
-              width: "200px",
-              height: "200px",
-              position: "absolute",
-              marginLeft: "300px",
-              marginTop: "-70px",
-            }}
-          ></img>
-          <h4>Please fill your paypal ID?</h4>
-          <input
-            key="name"
-            type="text"
-            onChange={(e) => setPaypalId(e.target.value)}
-            value={paypalId}
-            placeholder="PAYPAL ID"
-            style={{
-              border: "1px solid #cfcbca",
-              width: "300px",
-              height: "35px",
-            }}
-          />
-        </div>
-      </Modal>
       <h1 style={{ fontSize: 72, marginLeft: "500px", fontStyle: "italic" }}>
         Mã Booking: {bookingCard.bookingCardId}
       </h1>
@@ -218,7 +183,7 @@ function BookingCardDetails(props) {
                               style={{ fontSize: "16px", fontStyle: "italic" }}
                             />{" "}
                           </i>
-                          <span marginLeft="50px"> &nbsp;&nbsp;&nbsp;</span>
+                          <br></br>
                           <NumberFormat
                             value={
                               bookingCardDetail.price -
@@ -298,7 +263,7 @@ function BookingCardDetails(props) {
                     <td style={{ height: "40px" }}>
                       <Button
                         type="primary"
-                        onClick={setVisibleConfirmModal}
+                        onClick={showPaypal}
                         disabled={isDisableButton}
                       >
                         Đặt cọc

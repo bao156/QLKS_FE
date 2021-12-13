@@ -10,9 +10,8 @@ function CustomerInfor() {
     cmnd: "",
     name: "",
     phoneNumber: "",
-    taxCode: "",
+    clientId: "",
   });
-
 
   const UpdateCustomerInfor = async () => {
     const res = await axios
@@ -66,71 +65,91 @@ function CustomerInfor() {
       >
         Thông tin tài khoản
       </h1>
-      <input
-        key="cmnd"
-        type="text"
-        onChange={(e) => setCustomer({ ...customer, ["cmnd"]: e.target.value })}
-        value={customer.cmnd}
-        placeholder="Nhập CMND"
-        style={{
-          border: "1px solid #cfcbca",
-          width: "300px",
-          height: "60px",
-          marginLeft: "200px",
-        }}
-      />
+      <h5 style={{ marginLeft: "80px" }}>
+        ID Card
+        <input
+          key="cmnd"
+          type="text"
+          onChange={(e) =>
+            setCustomer({ ...customer, ["cmnd"]: e.target.value })
+          }
+          value={customer.cmnd}
+          placeholder="Nhập CMND"
+          style={{
+            border: "1px solid #cfcbca",
+            width: "300px",
+            height: "60px",
+            marginLeft: "115px",
+          }}
+        />
+      </h5>
+
       <br></br>
       <br></br>
       <br></br>
-      <input
-        key="name"
-        type="text"
-        onChange={(e) => setCustomer({ ...customer, ["name"]: e.target.value })}
-        value={customer.name}
-        placeholder="Nhập họ và tên"
-        style={{
-          border: "1px solid #cfcbca",
-          width: "300px",
-          height: "60px",
-          marginLeft: "200px",
-        }}
-      />
+      <h5 style={{ marginLeft: "80px" }}>
+        Name
+        <input
+          key="name"
+          type="text"
+          onChange={(e) =>
+            setCustomer({ ...customer, ["name"]: e.target.value })
+          }
+          value={customer.name}
+          placeholder="Nhập họ và tên"
+          style={{
+            border: "1px solid #cfcbca",
+            width: "300px",
+            height: "60px",
+            marginLeft: "130px",
+          }}
+        />
+      </h5>
+
       <br></br>
       <br></br>
       <br></br>
-      <input
-        key="phoneNumber"
-        type="text"
-        onChange={(e) =>
-          setCustomer({ ...customer, ["phoneNumber"]: e.target.value })
-        }
-        value={customer.phoneNumber}
-        placeholder="Nhập số điện thoại"
-        style={{
-          border: "1px solid #cfcbca",
-          width: "300px",
-          height: "60px",
-          marginLeft: "200px",
-        }}
-      />
+      <h5 style={{ marginLeft: "80px" }}>
+        Phone
+        <input
+          key="phoneNumber"
+          type="text"
+          onChange={(e) =>
+            setCustomer({ ...customer, ["phoneNumber"]: e.target.value })
+          }
+          value={customer.phoneNumber}
+          placeholder="Nhập số điện thoại"
+          style={{
+            border: "1px solid #cfcbca",
+            width: "300px",
+            height: "60px",
+            marginLeft: "130px",
+          }}
+        />
+      </h5>
+
       <br></br>
       <br></br>
       <br></br>
-      <input
-        key="taxCode"
-        type="text"
-        onChange={(e) =>
-          setCustomer({ ...customer, ["taxCode"]: e.target.value })
-        }
-        value={customer.taxCode}
-        placeholder="Nhập mã số thuế"
-        style={{
-          border: "1px solid #cfcbca",
-          width: "300px",
-          height: "60px",
-          marginLeft: "200px",
-        }}
-      />
+      <h5 style={{ marginLeft: "80px" }}>
+        Mã tài khoản
+        <input
+          key="taxCode"
+          type="text"
+          onChange={(e) =>
+            setCustomer({ ...customer, ["clientId"]: e.target.value })
+          }
+          value={customer.clientId}
+          placeholder="Nhập mã tài khoản"
+          style={{
+            border: "1px solid #cfcbca",
+            width: "300px",
+            height: "60px",
+            marginLeft: "70px",
+          }}
+        />
+      </h5>
+
       <br></br>
       <br></br>
       <br></br>
@@ -140,7 +159,7 @@ function CustomerInfor() {
         shape="round"
         onClick={UpdateCustomerInfor}
         style={{
-          width: "300px",
+          width: "250px",
           height: "80px",
           marginLeft: "400px",
         }}

@@ -84,53 +84,64 @@ export function ChangingDateBookingInRoomClass(props) {
 
   return (
     <div>
-      <input
-        name="requested_order_ship_date"
-        type="text"
-        disabled="true"
-        value={moment(officialDateBooking.startDate).format("YYYY-MM-DD")}
-        style={{
-          height: "50px",
-          fontSize: "18px",
-          width: "250px",
-          top: "200px",
-          marginLeft: "1020px",
-        }}
-      />
-      <VscCalendar size="30"></VscCalendar>
-      <Button
-        type="primary"
-        onClick={() => setChangingDateModalVisibled()}
-        style={{
-          border: "none",
-          marginLeft: "1300px",
-          width: "100px",
-          height: "30px",
-          marginTop: "20px",
-          backgroundColor: "gray",
-          color: "white",
-        }}
-      >
-        Change
-        <RiEdit2Line></RiEdit2Line>
-      </Button>
-      <br></br>
-      <br></br>
-      <input
-        name="requested_order_ship_date"
-        type="text"
-        value={moment(officialDateBooking.endDate).format("YYYY-MM-DD")}
-        disabled="true"
-        style={{
-          height: "50px",
-          fontSize: "18px",
-          width: "250px",
-          marginLeft: "1020px",
-        }}
-      />
-
-      <VscCalendar size="30" marginLeft="200px"></VscCalendar>
-
+      <h5 style={{marginLeft:"600px"}}><i>Ngày nhận</i><span style={{marginLeft:"230px"}}></span><i>Ngày trả</i></h5>
+      <p>
+        <input
+          name="requested_order_ship_date"
+          type="text"
+          disabled="true"
+          value={moment(officialDateBooking.startDate).format("YYYY-MM-DD")}
+          style={{
+            height: "50px",
+            fontSize: "18px",
+            width: "250px",
+            top: "200px",
+            marginLeft: "600px",
+          }}
+        />
+        <VscCalendar size="30"></VscCalendar>
+        <Button
+          type="primary"
+          onClick={() => setChangingDateModalVisibled()}
+          style={{
+            border: "none",
+            position:"absolute",
+            marginLeft: "400px",
+            marginTop:"-200px",
+            width: "100px",
+            height: "30px",
+            marginTop: "20px",
+            backgroundColor: "gray",
+            color: "white",
+          }}
+        >
+          Change
+          <RiEdit2Line></RiEdit2Line>
+        </Button>
+        <br></br>
+        <input
+          name="requested_order_ship_date"
+          type="text"
+          value={moment(officialDateBooking.endDate).format("YYYY-MM-DD")}
+          disabled="true"
+          style={{
+            height: "50px",
+            position: "absolute",
+            fontSize: "18px",
+            width: "250px",
+            marginLeft: "920px",
+            marginTop: "-50px",
+          }}
+        />
+        <VscCalendar
+          size="30"
+          style={{
+            marginLeft: "1170px",
+            marginTop:"-35px",
+            position: "absolute",
+          }}
+        ></VscCalendar>
+      </p>
       <Modal
         title="Điều chỉnh thời gian nhận & trả phòng"
         visible={isChangingDateVisibled}

@@ -198,7 +198,7 @@ function RoomViewDetail(props) {
           ></ChangingDateBookingInRoomClass>
         ) : null}
       </div>
-      <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+      <br /> <br /> <br /> <br /> <br /><br /><br />
       <h1 style={{ fontSize: 72, marginLeft: "400px", fontStyle: "italic" }}>
         {roomClass.roomClassName} Room
       </h1>

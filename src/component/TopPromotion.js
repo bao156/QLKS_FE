@@ -49,6 +49,16 @@ function TopPromotion(props) {
                   style={{ fontSize: "20px" }}
                 >
                   <NumberFormat
+                    value={
+                      roomClass.price -
+                      roomClass.price * roomClass.promotionValue
+                    }
+                    displayType={"text"}
+                    thousandSeparator={true}
+                  />
+                  {""}/Ngày
+                  <br></br>
+                  <NumberFormat
                     value={roomClass.price}
                     displayType={"text"}
                     thousandSeparator={true}
@@ -58,15 +68,6 @@ function TopPromotion(props) {
                       fontSize: "17px",
                     }}
                   />{" "}
-                  <NumberFormat
-                    value={
-                      roomClass.price -
-                      roomClass.price * roomClass.promotionValue
-                    }
-                    displayType={"text"}
-                    thousandSeparator={true}
-                  />
-                  {""}/Ngày
                 </p>
                 <Button
                   key={roomClass.id}

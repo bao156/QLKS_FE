@@ -30,7 +30,7 @@ export function TabsMenu(props) {
           tab={
             <span style={{ fontSize: "25px", marginRight: "50px" }}>
               <CgEricsson />
-              Overview
+              Tổng quan
             </span>
           }
           key="1"
@@ -39,7 +39,7 @@ export function TabsMenu(props) {
           tab={
             <span style={{ fontSize: "25px", marginRight: "50px" }}>
               <DiMeteor />
-              Rooms
+              Hạng phòng
             </span>
           }
           key="2"
@@ -48,7 +48,7 @@ export function TabsMenu(props) {
           tab={
             <span style={{ fontSize: "25px" }}>
               <RiMapPinAddFill />
-              Contact
+              Liên hệ
             </span>
           }
           key="3"

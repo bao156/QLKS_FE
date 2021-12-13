@@ -56,7 +56,9 @@ function RoomView(props) {
       );
     } else if (search == "2.000.000 - 5.000.000") {
       setFilteredRoomClasses(
-        roomClasses.filter((roomClass) => roomClass.price >= 2000000 && roomClass.price < 5000000)
+        roomClasses.filter(
+          (roomClass) => roomClass.price >= 2000000 && roomClass.price < 5000000
+        )
       );
     }
   }, [search, roomClasses]);
@@ -64,7 +66,7 @@ function RoomView(props) {
   return (
     <div>
       <h1 style={{ fontSize: 72, marginLeft: "500px", fontStyle: "italic" }}>
-        Room Classes
+        Hạng phòng
       </h1>
       <span></span>
 
@@ -112,15 +114,6 @@ function RoomView(props) {
                     </i>
                   ) : (
                     <div>
-                      <i style={{ textDecorationLine: "line-through" }}>
-                        <NumberFormat
-                          value={roomClass.price}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          style={{ fontSize: "16px", fontStyle: "italic" }}
-                        />{" "}
-                      </i>
-                      <span marginLeft="50px"> &nbsp;&nbsp;&nbsp;</span>
                       <NumberFormat
                         value={
                           roomClass.price -
@@ -132,6 +125,16 @@ function RoomView(props) {
                         subfix={"$"}
                       />{" "}
                       /Ngày
+                      <br></br>
+                      <span marginLeft="50px"> &nbsp;&nbsp;&nbsp;</span>
+                      <i style={{ textDecorationLine: "line-through" }}>
+                        <NumberFormat
+                          value={roomClass.price}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          style={{ fontSize: "16px", fontStyle: "italic" }}
+                        />{" "}
+                      </i>
                     </div>
                   )}
                 </p>
