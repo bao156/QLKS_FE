@@ -2,7 +2,7 @@ import { Button, Col, Modal, Pagination } from "antd";
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { FcCalendar, FcViewDetails } from "react-icons/fc";
+import { FcCalendar, FcStackOfPhotos, FcViewDetails } from "react-icons/fc";
 import NumberFormat from "react-number-format";
 import { Success, Warning } from "../../Notification";
 
@@ -101,7 +101,7 @@ export function ModalBookingDetail(props) {
         <FcViewDetails size="20"></FcViewDetails>
         Xem chi tiết
       </Button>
-     
+
       <Modal
         title="VIEW"
         visible={isChangingDateVisibled}
@@ -122,6 +122,15 @@ export function ModalBookingDetail(props) {
         ></img>
         <p style={{ marginLeft: "80px" }}>
           <h4 style={{ marginRight: "250px" }}>
+            <FcStackOfPhotos></FcStackOfPhotos>Tiền cọc:&#160;
+            <NumberFormat
+              value={props.deposit}
+              displayType={"text"}
+              thousandSeparator={true}
+              style={{ fontSize: "24px" }}
+            />{" "}
+          </h4>
+          <h4 style={{ marginRight: "250px" }}>
             <FcCalendar></FcCalendar>Ngày nhận:&#160;
             {moment(props.receivingAtDate).format("DD-MM-YYYY")}
             &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
@@ -137,6 +146,7 @@ export function ModalBookingDetail(props) {
                 <th>Tên hạng</th>
                 <th>Số lượng</th>
                 <th>Đơn giá</th>
+                <th>Số ngày ở</th>
                 <th>Thành tiền</th>
               </tr>
             </thead>
@@ -160,6 +170,7 @@ export function ModalBookingDetail(props) {
                       style={{ fontSize: "16px", fontStyle: "italic" }}
                     />{" "}
                   </td>
+                  <td>{props.quantityOfDates}</td>
                   <td>
                     <NumberFormat
                       value={
@@ -185,7 +196,7 @@ export function ModalBookingDetail(props) {
           style={{ marginLeft: "500px" }}
         />
         <h3 style={{ marginLeft: "800PX" }}>
-          Tổng:
+          Tổng:&#160;
           <NumberFormat
             value={props.total}
             displayType={"text"}

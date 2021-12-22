@@ -76,7 +76,7 @@ function TopPromotion(props) {
                   onClick={() => GetIdRoomClass(roomClass.id)}
                   style={{ width: "180px", height: "40px" }}
                 >
-                  View Detail
+                  Xem chi tiết
                 </Button>
               </div>
             </article>

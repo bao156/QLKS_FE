@@ -148,7 +148,7 @@ export function ModalRegister(props) {
           />
           <br></br>
           <br></br>
-          <span style={{ paddingRight: "70px" }}>&nbsp;</span>
+          <span style={{ paddingRight: "71px" }}>&nbsp;</span>
           <input
             key="taxCode"
             type="text"
@@ -157,6 +157,24 @@ export function ModalRegister(props) {
             }
             value={customer.taxCode}
             placeholder="Nhập mã số thuế"
+            style={{
+              borderBottom: "2px solid black",
+              borderRadius: "3px",
+              width: "300px",
+              height: "40px",
+            }}
+          />
+          <br></br>
+          <br></br>
+          <span style={{ paddingRight: "71px" }}>&nbsp;</span>
+          <input
+            key="clientId"
+            type="text"
+            onChange={(e) =>
+              setCustomer({ ...customer, ["clientId"]: e.target.value })
+            }
+            value={customer.clientId}
+            placeholder="Mã tài khoản paypal"
             style={{
               borderBottom: "2px solid black",
               borderRadius: "3px",
@@ -187,29 +205,7 @@ export function ModalRegister(props) {
               height: "40px",
             }}
           />
-          <br></br>
-          <br></br>
-          <span style={{ paddingRight: "53px" }}>&nbsp;</span>
-          <label
-            style={{ color: "red", marginRight: "10px", fontSize: "20px" }}
-          >
-            *
-          </label>
-          <input
-            key="clientId"
-            type="text"
-            onChange={(e) =>
-              setCustomer({ ...customer, ["clientId"]: e.target.value })
-            }
-            value={customer.clientId}
-            placeholder="Nhập mã tài khoản"
-            style={{
-              borderBottom: "2px solid black",
-              borderRadius: "3px",
-              width: "300px",
-              height: "40px",
-            }}
-          />
+
           <br></br>
           <br></br>
 

@@ -1,10 +1,10 @@
-import { Button, Col, Modal, Row } from "antd";
+import { Button, Modal } from "antd";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { RiEdit2Line } from "react-icons/ri";
 import { VscCalendar } from "react-icons/vsc";
 import { Success, Warning } from "./Notification";
-import { RiEdit2Line } from "react-icons/ri";
-import moment from "moment";
 
 export function ChangingDateBookingInRoomClass(props) {
   const [dateBooking, setDateBooking] = useState({
@@ -84,7 +84,11 @@ export function ChangingDateBookingInRoomClass(props) {
 
   return (
     <div>
-      <h5 style={{marginLeft:"600px"}}><i>Ngày nhận</i><span style={{marginLeft:"230px"}}></span><i>Ngày trả</i></h5>
+      <h5 style={{ marginLeft: "600px" }}>
+        <i>Ngày nhận</i>
+        <span style={{ marginLeft: "230px" }}></span>
+        <i>Ngày trả</i>
+      </h5>
       <p>
         <input
           name="requested_order_ship_date"
@@ -105,9 +109,9 @@ export function ChangingDateBookingInRoomClass(props) {
           onClick={() => setChangingDateModalVisibled()}
           style={{
             border: "none",
-            position:"absolute",
+            position: "absolute",
             marginLeft: "400px",
-            marginTop:"-200px",
+            marginTop: "-200px",
             width: "100px",
             height: "30px",
             marginTop: "20px",
@@ -137,7 +141,7 @@ export function ChangingDateBookingInRoomClass(props) {
           size="30"
           style={{
             marginLeft: "1170px",
-            marginTop:"-35px",
+            marginTop: "-35px",
             position: "absolute",
           }}
         ></VscCalendar>

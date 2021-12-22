@@ -34,9 +34,9 @@ function SlideHotel() {
         </Col>
         <Col span={8}>
           <h1
-            style={{ color: "gray", marginTop: "200px", marginLeft: "-150px" }}
+            style={{ color: "gray", marginTop: "200px", marginLeft: "-250px" }}
           >
-            Welcome to D&B Hotel
+            Chào mừng đến với  khách sạn D&B
           </h1>
           <p style={{ marginLeft: "-300px", fontSize: "25px",fontStyle:"italic" }}>
             {" "}

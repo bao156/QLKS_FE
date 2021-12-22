@@ -154,6 +154,7 @@ export function BookingCardHistories(props) {
                       receivingAtDate={bookingCard.receivingAtDate}
                       backingAtDate={bookingCard.backingAtDate}
                       quantityOfDates={bookingCard.quantityOfDates}
+                      deposit={bookingCard.deposit}
                     ></ModalBookingDetail>
                   </td>
                 </tr>
